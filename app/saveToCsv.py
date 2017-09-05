@@ -7,7 +7,7 @@ from saveTxtToImage import *
 
 # 保存单词信息到csv文件类
 class saveToCsv:
-
+    
     def saveImageInfoToCsv(self,path,letterArr):
         csvFile = open(path,"w")
         writer = csv.writer(csvFile)
