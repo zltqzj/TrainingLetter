@@ -8,7 +8,7 @@ import csv
 from PIL import Image, ImageDraw, ImageFont
 
 fg  = (0, 0, 0)
-white  = (255, 255, 255)
+white  = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
 PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
 fontPath = PATH('../font/aescrawl.ttf') # 本地字体文件
@@ -32,14 +32,6 @@ def generateLettersArray():
 
 # 单词保存到一张图片中
 def drawText(txt, font, pos=(0, 0), fill=fg, bg=white):
-    """
-    绘制txt文本
-    :param txt:
-    :param pos:
-    :param fill:
-    :param bg: 背景色
-    :return:
-    """
     txt_size = font.getsize(txt)
     image = Image.new('RGBA', (txt_size[0] + pos[0] + random.randint(0, 30),
                                txt_size[1] + pos[1] + random.randint(0, 20)),
@@ -73,9 +65,10 @@ def saveToCsv(letterArr):
     writer = csv.writer(csvFile)
     writer.writerow(fileHeader)
     for index,value in enumerate(letterArr):
-        image = drawText(value,ImageFont.truetype(fontPath, fontSize),(0,0),fg ,white )
-        imageFileName =  value+'.png'
-        image.save(PATH('../image/' + imageFileName))
+        image = drawText(value,ImageFont.truetype(fontPath, fontSize),(0,0),fg ,(random.randint(0,255), random.randint(0,255), random.randint(0,255)) )
+        rgb_im = image.convert('RGB')
+        imageFileName =  value+'.jpg'
+        rgb_im.save(PATH('../image/' + imageFileName),quality=95)
         d1 = [PATH('../image/' + imageFileName), imageFileName]
         writer.writerow(d1)      # 写入数据
     csvFile.close()
@@ -85,5 +78,5 @@ def operation():
     letterArr = generateLettersArray()
     saveToCsv(letterArr)
 
- 
+
 operation()
