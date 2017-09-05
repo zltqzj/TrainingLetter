@@ -11,8 +11,8 @@ fg  = (0, 0, 0)
 white  = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
 PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
-fontPath = PATH('../font/aescrawl.ttf') # 本地字体文件
-fontSize = 12
+fontPath = PATH('../font/Afromatic.ttf') # 本地字体文件
+fontSize = 14
 
 upperLetterRandom  = chr(random.randint(65,90))
 lowerLetterRandom = chr(random.randint(97,122))
@@ -33,11 +33,11 @@ def generateLettersArray():
 # 单词保存到一张图片中
 def drawText(txt, font, pos=(0, 0), fill=fg, bg=white):
     txt_size = font.getsize(txt)
-    image = Image.new('RGBA', (txt_size[0] + pos[0] + random.randint(0, 30),
-                               txt_size[1] + pos[1] + random.randint(0, 20)),
+    image = Image.new('RGBA', (txt_size[0] + pos[0] + random.randint(0, 30) +30,
+                               txt_size[1] + pos[1] + random.randint(0, 20) +20),
                            bg)
     draw = ImageDraw.Draw(image)
-    draw.text(pos, txt, font=font, fill=fill)
+    draw.text((random.randint(0, 30),random.randint(0, 20)), txt, font=font, fill=fill)
     rotate = image.rotate(random.randint(-3, 3), expand=1)
     image.paste(rotate, (0, 0), rotate)
     image = image.point(lambda i: add_noise(i))
@@ -73,10 +73,8 @@ def saveToCsv(letterArr):
         writer.writerow(d1)      # 写入数据
     csvFile.close()
 
-
 def operation():
     letterArr = generateLettersArray()
     saveToCsv(letterArr)
-
 
 operation()
