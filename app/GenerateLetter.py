@@ -18,7 +18,7 @@ class generateLetter:
         return letter
 
     def randomNumber(self):
-        number  = random.randint(2,7)
+        number  = config.random.randint(2,7)
         return number
 
     def generateLettersArray(self):

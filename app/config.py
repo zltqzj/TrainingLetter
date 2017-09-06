@@ -17,7 +17,8 @@ white  = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
 PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
 # 本地字体文件路径
-fontPath = PATH('../font/Afromatic.ttf')
+fontPath = [ PATH('../font/Afromatic.ttf') , PATH('../font/aescrawl.ttf')]
+
 # 字体大小
 fontSize = 14
 
@@ -27,14 +28,15 @@ imagePath = lambda imageName : PATH('../image/' + imageName)
 # 本地csv路径
 csvPath = '../letterCsv/letter.csv'
 
-#文件头
+#csv文件头
 fileHeader =  ["path","content"]
 
-# 随机颜色数值
-randomColorNumber = random.randint(0,255)
 
 # 随机颜色
-randomColor = (randomColorNumber,randomColorNumber,randomColorNumber)
+randomColor = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
 
 # 生成x个单词
-wordNumber = 10
+wordNumber = 20
+
+# 单词长度区间
+wordLength = random.randint(2,7)
